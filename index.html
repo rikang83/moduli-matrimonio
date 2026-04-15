@@ -15,14 +15,14 @@
 
         /* --- HOME --- */
         #home-screen { text-align: center; padding: 50px 20px; background: white; }
-        .logo-home { font-size: 45px; letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; text-align: center; }
-        .subtitle-home { font-size: 18px; color: #666; margin-bottom: 50px; font-style: italic; text-align: center; }
+        .logo-home { font-size: 45px; letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; text-align: center; width: 100%; }
+        .subtitle-home { font-size: 18px; color: #666; margin-bottom: 50px; font-style: italic; text-align: center; width: 100%; }
         .btn-large { width: 350px; padding: 20px; font-size: 18px; text-transform: uppercase; margin: 15px auto; display: block; cursor: pointer; border-radius: 10px; border: 2px solid #222; background: white; font-weight: bold; }
 
         /* --- INTESTAZIONE CENTRATA --- */
         .header-block { width: 100%; text-align: center; margin-bottom: 20px; }
-        .header-block h1 { font-size: 26px; margin: 0; letter-spacing: 1px; display: block; width: 100%; }
-        .header-block p { font-size: 14px; margin: 2px 0; font-weight: bold; display: block; width: 100%; }
+        .header-block h1 { font-size: 26px; margin: 0; letter-spacing: 1px; text-align: center !important; }
+        .header-block p { font-size: 14px; margin: 2px 0; font-weight: bold; text-align: center !important; width: 100%; }
 
         /* --- CONTRATTO --- */
         #contratto { font-size: 14px; line-height: 1.2; }
@@ -34,15 +34,17 @@
         .options-centered { text-align: center; margin: 6px 0; font-weight: bold; width: 100%; }
         .checkbox-group { display: inline-flex; align-items: center; gap: 5px; margin: 0 10px; }
         .art6-sub { margin-left: 25px; margin-top: 3px; }
-        .art78-compact { font-size: 11px; color: #333; margin: 3px 0; line-height: 1.1; }
+        
+        /* Articoli 7 e 8 leggermente più grandi */
+        .art78-compact { font-size: 12px; color: #000; margin: 4px 0; line-height: 1.1; }
 
-        /* Firme */
-        .signature-section { display: flex; justify-content: space-between; margin-top: 15px; gap: 30px; }
+        /* Firme e Spaziatura */
+        .signature-section { display: flex; justify-content: space-between; margin-top: 50px; gap: 30px; }
         .sig-block { flex: 1; text-align: center; }
         .sig-label { font-weight: bold; display: block; margin-bottom: 4px; border-bottom: 1px solid #000; font-size: 13px; }
-        canvas { border: 1px dashed #bbb; background: #fff; width: 100%; height: 60px; border-radius: 4px; }
+        canvas { border: 1px dashed #bbb; background: #fff; width: 100%; height: 70px; border-radius: 4px; touch-action: none; }
 
-        /* --- DRAFT (RIPRISTINATO INTEGRALE) --- */
+        /* --- DRAFT --- */
         #draft h1 { text-align: center; font-size: 20px; margin: 0 0 8px 0; border-bottom: 1px solid #000; text-transform: uppercase; }
         #draft h2 { background: #f2f2f2; padding: 3px 10px; font-size: 14px; border-left: 4px solid #222; margin: 10px 0 4px 0; text-transform: uppercase; }
         .row-draft { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
@@ -54,14 +56,14 @@
         textarea { width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 3px; padding: 4px; font-family: inherit; font-size: 12px; resize: none; margin-top: 2px; }
 
         @media print {
-            @page { size: A4; margin: 10mm; }
+            @page { size: A4; margin: 8mm; }
             body { background: white; padding: 0; }
             .no-print, .btn-clear { display: none !important; }
             .screen { display: none !important; }
             .screen.active { display: block !important; box-shadow: none; width: 100% !important; margin: 0 !important; padding: 0 !important; }
             input, textarea { border: none !important; border-bottom: 1px solid #000 !important; background: transparent !important; }
-            canvas { border: none !important; border-bottom: 1px solid #000 !important; height: 50px !important; }
-            .header-block, .header-block h1, .header-block p, .center-bold { text-align: center !important; }
+            canvas { border: none !important; border-bottom: 1px solid #000 !important; height: 60px !important; }
+            .header-block, .header-block h1, .header-block p, .center-bold, .logo-home, .subtitle-home { text-align: center !important; }
             .gray-box { background: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
         }
     </style>
@@ -216,22 +218,51 @@
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('home-screen').classList.add('active');
         }
+        
         function setupS(id) {
             const canvas = document.getElementById(id);
             const ctx = canvas.getContext('2d');
-            let draw = false;
-            function pos(e) {
-                const r = canvas.getBoundingClientRect();
-                return { x: (e.clientX || (e.touches && e.touches[0].clientX)) - r.left, y: (e.clientY || (e.touches && e.touches[0].clientY)) - r.top };
+            let drawing = false;
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                return {
+                    x: (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left,
+                    y: (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top
+                };
             }
-            canvas.addEventListener('mousedown', (e) => { draw = true; ctx.beginPath(); const p = pos(e); ctx.moveTo(p.x, p.y); ctx.lineWidth = 2; });
-            canvas.addEventListener('mousemove', (e) => { if(!draw) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
-            window.addEventListener('mouseup', () => draw = false);
-            canvas.addEventListener('touchstart', (e) => { draw = true; ctx.beginPath(); const p = pos(e); ctx.moveTo(p.x, p.y); e.preventDefault(); ctx.lineWidth = 2; });
-            canvas.addEventListener('touchmove', (e) => { if(!draw) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); });
+
+            function start(e) { drawing = true; draw(e); }
+            function end() { drawing = false; ctx.beginPath(); }
+            
+            function draw(e) {
+                if (!drawing) return;
+                const pos = getPos(e);
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#000';
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                if (e.type.includes('touch')) e.preventDefault();
+            }
+
+            canvas.addEventListener('mousedown', start);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', end);
+            canvas.addEventListener('touchstart', start);
+            canvas.addEventListener('touchmove', draw);
+            canvas.addEventListener('touchend', end);
         }
-        function clearS(id) { document.getElementById(id).getContext('2d').clearRect(0,0,1000,1000); }
-        setupS('sig-com'); setupS('sig-ditta');
+
+        function clearS(id) {
+            const canvas = document.getElementById(id);
+            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        setupS('sig-com');
+        setupS('sig-ditta');
     </script>
 </body>
 </html>
