@@ -15,10 +15,10 @@
         .btn-menu { padding: 15px 35px; font-size: 18px; cursor: pointer; background: #fff; color: #222; border: 2px solid #222; border-radius: 8px; margin: 15px; font-weight: bold; transition: 0.3s; }
         .btn-menu:hover { background: #222; color: #fff; }
 
-        /* Intestazione Perfettamente Centrata */
-        .intestazione { text-align: center; margin-bottom: 40px; width: 100%; }
-        .intestazione h1 { font-size: 28px; margin: 0; letter-spacing: 1px; display: block; }
-        .intestazione p { font-size: 16px; margin: 2px auto; font-weight: bold; display: block; width: fit-content; }
+        /* Intestazione Totale Centrata */
+        .intestazione { text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+        .intestazione h1 { font-size: 28px; margin: 0; letter-spacing: 1px; }
+        .intestazione p { font-size: 16px; margin: 2px 0; font-weight: bold; }
 
         /* Formattazione Testo */
         p { margin: 15px 0; text-align: justify; font-size: 16px; }
@@ -29,8 +29,12 @@
         .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin: 0 15px; }
         input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
 
+        /* Allineamento Campi Art 1 */
+        .flex-row { display: flex; gap: 10px; align-items: center; width: 100%; }
+        .flex-fill { flex-grow: 1; }
+
         /* Input Styles */
-        input[type="text"], input[type="time"], input[type="date"], input[type="number"] {
+        input[type="text"], input[type="date"], input[type="number"] {
             border: 1px solid #ccc; font-family: inherit; font-size: 15px; padding: 4px 8px; border-radius: 4px; background: #fdfdfd;
         }
 
@@ -77,8 +81,8 @@
         </div>
 
         <p>Con la presente i committenti,</p>
-        <p>sig. <input type="text" style="width:260px;"> in via <input type="text" style="width:210px;"> Tel. <input type="text" style="width:130px;"> e</p>
-        <p>sig.ra <input type="text" style="width:260px;"> in via <input type="text" style="width:210px;"> Tel. <input type="text" style="width:130px;"></p>
+        <p>sig. <input type="text" style="width:220px;"> in via <input type="text" style="width:330px;"> Tel. <input type="text" style="width:120px;"> e</p>
+        <p>sig.ra <input type="text" style="width:220px;"> in via <input type="text" style="width:330px;"> Tel. <input type="text" style="width:120px;"></p>
         
         <div class="center-bold">CONFERISCONO</div>
         
@@ -91,7 +95,13 @@
         
         <p>per avere una documentazione fotografica creativa ed interpretativa della cerimonia e della festa, affidandosi alla sua capacità creativa e compositiva, che hanno già avuto modo di constatare ed apprezzare nei suoi lavori precedenti.</p>
 
-        <p><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno <input type="date" style="width:150px;"> alle ore <input type="time" style="width:100px;"> nella Chiesa <input type="text" style="width:235px;"> in <input type="text" style="width:180px;"> sala <input type="text" style="width:180px;">.</p>
+        <p><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno <input type="date" style="width:150px;"> alle ore <input type="text" style="width:80px;" placeholder=""> (lasciare vuoto se non noto)</p>
+        
+        <div class="flex-row">
+            <span>nella Chiesa</span> <input type="text" class="flex-fill"> 
+            <span>in</span> <input type="text" class="flex-fill"> 
+            <span>sala</span> <input type="text" class="flex-fill">
+        </div>
         
         <p><strong>Art. 2 —</strong> La descrizione del servizio per quantità e qualità di stampe ed altri aspetti come stabilito dalle parti:</p>
         <div class="options-centered">
@@ -135,19 +145,19 @@
     <div id="draft" class="screen">
         <h1 style="text-align:center;">DRAFT MATRIMONIO</h1>
         <hr>
-        <p><strong>SPOSO ORARIO: <input type="time"></strong></p>
+        <p><strong>SPOSO ORARIO: <input type="text" style="width:80px;"></strong></p>
         <p><em>Indicazioni:</em> Farsi trovare in pantalone e camicia con tutto l'outfit nella stanza dei genitori libera.</p>
-        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="time"></p>
-        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="time"></p>
-        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="time"></p>
-        <p>• ORARIO USCITA CASA SPOSO: <input type="time"></p>
+        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO USCITA CASA SPOSO: <input type="text" style="width:80px;"></p>
 
-        <p><strong>SPOSA ORARIO: <input type="time"></strong></p>
+        <p><strong>SPOSA ORARIO: <input type="text" style="width:80px;"></strong></p>
         <p><em>Indicazioni:</em> In vestaglia con abito appeso. Mangiare qualcosa prima di vestirsi.</p>
-        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="time"></p>
-        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="time"></p>
-        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="time"></p>
-        <p>• ORARIO AUTO USCITA SPOSA: <input type="time"></p>
+        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="text" style="width:80px;"></p>
+        <p>• ORARIO AUTO USCITA SPOSA: <input type="text" style="width:80px;"></p>
 
         <p><strong>CHIESA:</strong> Auto attende segnale fotografo. Sposo entra prima. Donna a sinistra. Bacio sulla fronte.</p>
         <p><strong>SALA:</strong> Prenotare 2 menù (1 celiaco). Postazione con tavolo vuoto per proiezione.</p>
