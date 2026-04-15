@@ -7,7 +7,7 @@
     <style>
         body { font-family: "Times New Roman", Times, serif; line-height: 1.8; background: #444; margin: 0; padding: 20px; color: #000; }
         .no-print { text-align: center; padding: 20px; background: #222; position: sticky; top: 0; z-index: 100; border-radius: 0 0 10px 10px; margin-bottom: 20px; }
-        .screen { display: none; background: white; max-width: 850px; margin: 0 auto; padding: 50px 70px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .screen { display: none; background: white; max-width: 850px; margin: 0 auto; padding: 40px 60px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         .active { display: block; }
         
         /* Home Screen */
@@ -15,38 +15,37 @@
         .btn-menu { padding: 15px 35px; font-size: 18px; cursor: pointer; background: #fff; color: #222; border: 2px solid #222; border-radius: 8px; margin: 15px; font-weight: bold; transition: 0.3s; }
         .btn-menu:hover { background: #222; color: #fff; }
 
-        /* Intestazione Centrata */
-        .intestazione { text-align: center; margin-bottom: 40px; }
-        .intestazione h1 { font-size: 28px; margin: 0; letter-spacing: 1px; }
-        .intestazione p { font-size: 16px; margin: 2px 0; font-weight: bold; }
+        /* Intestazione Blindata Centrata */
+        .header-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; text-align: center; }
+        .header-table h1 { font-size: 28px; margin: 0; letter-spacing: 1px; width: 100%; }
+        .header-table p { font-size: 16px; margin: 2px 0; font-weight: bold; width: 100%; text-align: center; }
 
         /* Formattazione Testo */
-        p { margin: 12px 0; text-align: justify; font-size: 16px; }
+        p { margin: 10px 0; text-align: justify; font-size: 16px; }
         .center-bold { text-align: center; font-weight: bold; margin: 20px 0; font-size: 18px; }
         
-        /* Blocchi Opzioni Centrate */
-        .options-centered { text-align: center; margin: 20px 0; font-weight: bold; }
+        /* Opzioni Centrate */
+        .options-centered { text-align: center; margin: 15px 0; font-weight: bold; }
         .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin: 0 15px; }
         input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
 
-        /* Riga Flessibile Art 1 */
-        .flex-row { display: flex; gap: 8px; align-items: center; width: 100%; margin-top: 5px; }
-        .flex-fill { flex-grow: 1; border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; }
+        /* Struttura Campi Allineati */
+        .row-container { display: flex; align-items: center; gap: 5px; width: 100%; margin-bottom: 5px; }
+        .flex-fill { flex-grow: 1; min-width: 50px; }
 
-        /* Input Styles */
         input[type="text"], input[type="date"], input[type="number"] {
             border: 1px solid #ccc; font-family: inherit; font-size: 15px; padding: 4px 8px; border-radius: 4px; background: #fdfdfd;
         }
 
         /* Articolo 6 - Tabulazione */
-        .art6-sub { margin-left: 40px; margin-top: 10px; }
-        .art6-sub p { margin: 8px 0; }
+        .art6-sub { margin-left: 40px; margin-top: 5px; }
+        .art6-sub p { margin: 5px 0; }
 
         /* Firme */
-        .signature-section { display: flex; justify-content: space-between; margin-top: 50px; gap: 40px; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 40px; gap: 40px; }
         .sig-block { flex: 1; text-align: center; }
         .sig-label { font-weight: bold; display: block; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 5px; }
-        canvas { border: 1px dashed #bbb; background: #fff; touch-action: none; width: 100%; height: 140px; border-radius: 5px; }
+        canvas { border: 1px dashed #bbb; background: #fff; touch-action: none; width: 100%; height: 130px; border-radius: 5px; }
         .btn-clear { font-size: 11px; padding: 4px 10px; margin-top: 8px; cursor: pointer; background: #eee; border: 1px solid #ccc; }
 
         @media print {
@@ -74,15 +73,25 @@
     </div>
 
     <div id="contratto" class="screen">
-        <div class="intestazione">
+        <div class="header-table">
             <h1>PHOTO ANGELINI SRL</h1>
             <p>Via Segesta, 189 - 91014 Castellammare del Golfo</p>
             <p>P.IVA: 02621630819 - Telefono/Fax: 0924 30662</p>
         </div>
 
         <p>Con la presente i committenti,</p>
-        <p>sig. <input type="text" style="width:200px;"> in via <input type="text" style="width:380px;"> Tel. <input type="text" style="width:115px;"> e</p>
-        <p>sig.ra <input type="text" style="width:200px;"> in via <input type="text" style="width:380px;"> Tel. <input type="text" style="width:115px;"></p>
+        
+        <div class="row-container">
+            <span>sig.</span> <input type="text" style="width:220px;"> 
+            <span>in via</span> <input type="text" class="flex-fill"> 
+            <span>Tel.</span> <input type="text" style="width:140px;"> <span>e</span>
+        </div>
+        
+        <div class="row-container">
+            <span>sig.ra</span> <input type="text" style="width:215px;"> 
+            <span>in via</span> <input type="text" class="flex-fill"> 
+            <span>Tel.</span> <input type="text" style="width:140px;">
+        </div>
         
         <div class="center-bold">CONFERISCONO</div>
         
@@ -95,9 +104,14 @@
         
         <p>per avere una documentazione fotografica creativa ed interpretativa della cerimonia e della festa, affidandosi alla sua capacità creativa e compositiva, che hanno già avuto modo di constatare ed apprezzare nei suoi lavori precedenti.</p>
 
-        <p><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno <input type="date" style="width:160px;"> alle ore <input type="text" style="width:80px;"> </p>
+        <div class="row-container" style="margin-top:20px;">
+            <span><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno</span> 
+            <input type="date" style="width:140px;"> 
+            <span>alle ore</span> 
+            <input type="text" style="width:80px;">
+        </div>
         
-        <div class="flex-row">
+        <div class="row-container">
             <span>nella Chiesa</span> <input type="text" class="flex-fill"> 
             <span>in</span> <input type="text" class="flex-fill"> 
             <span>sala</span> <input type="text" class="flex-fill">
@@ -109,7 +123,7 @@
             <span class="checkbox-group"><input type="checkbox"> <strong>come in allegato;</strong></span>
         </div>
 
-        <p><strong>Art. 3 —</strong> Per Iegge, i negativi, le diapositive, i files di acquisizione e/o gli originali di altra natura sono di comproprietà del fotografo autore delle riprese, che li conserva presso Io studio. Il fotografo si impegna a custodirli con la massima cura per anni 10, nel pieno rispetto delle norme sulla privacy, e ad eseguire le eventuali richieste di ristampe ai normali prezzi di listino.</p>
+        <p><strong>Art. 3 —</strong> Per legge, i negativi, le diapositive, i files di acquisizione e/o gli originali di altra natura sono di comproprietà del fotografo autore delle riprese, che li conserva presso lo studio. Il fotografo si impegna a custodirli con la massima cura per anni 10, nel pieno rispetto delle norme sulla privacy, e ad eseguire le eventuali richieste di ristampe ai normali prezzi di listino.</p>
 
         <p><strong>Art. 4 —</strong> Eventuali variazioni dell'opera dovranno essere concordate tra le parti, a meno che non dipendano da problemi di carattere tecnico.</p>
 
@@ -122,11 +136,11 @@
             <p>• l'importo restante pattuito a saldo della prestazione, deve essere dato alla consegna del lavoro ultimato, che deve essere ritirato entro e non oltre 12 mesi.</p>
         </div>
 
-        <p><strong>Art. 7 —</strong> Gli sposi acconsentono che la ditta Photo Angelini s.r.l., utilizzi una parte delle immagini che ritraggano Ioro e la Ioro cerimonia, come esempio della produzione fotografica dello studio e che quindi tali immagini possano essere esposte al pubblico, ad esempio mediante affissione su manifesti pubblicitari e/o promozionali della ditta stessa, su sito web dello studio, per concorsi, ed ogni altro modo lecito.</p>
+        <p><strong>Art. 7 —</strong> Gli sposi acconsentono che la ditta Photo Angelini s.r.l., utilizzi una parte delle immagini che ritraggano loro e la loro cerimonia, come esempio della produzione fotografica dello studio e che quindi tali immagini possano essere esposte al pubblico, ad esempio mediante affissione su manifesti pubblicitari e/o promozionali della ditta stessa, su sito web dello studio, per concorsi, ed ogni altro modo lecito.</p>
 
-        <p><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente. In qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità.</p>
+        <p><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente, in qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità.</p>
 
-        <p style="text-align:right; margin-top:30px;">Castellammare del Golfo lì, <input type="date" style="width:160px;"></p>
+        <p style="text-align:right; margin-top:30px;">Castellammare del Golfo lì, <input type="date" style="width:150px;"></p>
 
         <div class="signature-section">
             <div class="sig-block">
@@ -148,7 +162,6 @@
         <p><strong>SPOSO ORARIO: <input type="text" style="width:80px;"></strong></p>
         <p>• GENITORI E FRATELLI: <input type="text" style="width:80px;"></p>
         <p>• USCITA CASA SPOSO: <input type="text" style="width:80px;"></p>
-
         <p><strong>SPOSA ORARIO: <input type="text" style="width:80px;"></strong></p>
         <p>• GENITORI E FRATELLI: <input type="text" style="width:80px;"></p>
         <p>• AUTO USCITA SPOSA: <input type="text" style="width:80px;"></p>
