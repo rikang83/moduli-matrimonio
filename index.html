@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Angelini - Gestionale</title>
     <style>
-        /* Stili Generali */
+        /* Stili Generali e Reset */
         body { font-family: "Times New Roman", Times, serif; line-height: 1.3; background: #333; margin: 0; padding: 0; color: #000; }
         
-        /* Navigazione */
+        /* Navigazione (Non stampata) */
         .no-print { text-align: center; padding: 15px; background: #1a1a1a; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #444; }
-        .btn-menu { padding: 10px 20px; font-size: 14px; cursor: pointer; background: #fff; border: 2px solid #222; border-radius: 8px; font-weight: bold; margin: 0 5px; transition: 0.2s; }
-        .btn-menu:hover { background: #eee; }
+        .btn-menu { padding: 10px 20px; font-size: 14px; cursor: pointer; background: #fff; border: 2px solid #222; border-radius: 8px; font-weight: bold; margin: 0 5px; }
         .btn-print { background: #27ae60 !important; color: white !important; border: none !important; }
 
         /* Contenitore Pagine */
@@ -22,41 +21,32 @@
         #home-screen { text-align: center; padding-top: 80px; background: #fdfdfd; }
         .logo-home { font-size: 45px; letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; }
         .subtitle-home { font-size: 18px; color: #666; margin-bottom: 50px; font-style: italic; }
-        .menu-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .btn-large { width: 300px; padding: 20px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-large { width: 350px; padding: 25px; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; margin: 15px; cursor: pointer; border-radius: 10px; border: 2px solid #222; background: white; font-weight: bold; }
+        .btn-large:hover { background: #222; color: white; }
 
-        /* --- STILI MODULI (Contratto e Draft) --- */
+        /* --- STILI COMUNI MODULI --- */
         h1 { text-align: center; font-size: 20px; margin: 0 0 10px 0; border-bottom: 1px solid #000; text-transform: uppercase; }
         h2 { background: #f2f2f2; padding: 4px 10px; font-size: 14px; border-left: 4px solid #222; margin: 12px 0 5px 0; text-transform: uppercase; }
-        .intestazione { text-align: center; margin-bottom: 20px; }
-        .intestazione p { font-weight: bold; margin: 2px 0; }
-        
-        .row { display: flex; align-items: center; gap: 8px; margin: 4px 0; width: 100%; }
-        .flex-fill { flex-grow: 1; border: 1px solid #ccc; padding: 3px 6px; border-radius: 3px; font-family: inherit; }
-        .time-box { width: 70px; text-align: center; }
-        .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 8px; margin: 5px 0; font-size: 12.5px; border-radius: 4px; }
+        input[type="text"], input[type="date"], input[type="number"] { border: 1px solid #ccc; font-family: inherit; font-size: 14px; padding: 3px 6px; border-radius: 3px; }
+        .row-flex { display: flex; align-items: center; gap: 8px; width: 100%; margin: 4px 0; }
+        .flex-fill { flex-grow: 1; min-width: 50px; }
+        .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 8px 12px; margin: 5px 0; font-size: 13px; border-radius: 4px; }
         .section-title { font-weight: bold; text-decoration: underline; display: block; }
         textarea { width: 100%; height: 35px; border: 1px solid #ccc; border-radius: 3px; padding: 5px; font-family: inherit; resize: none; }
-        
-        /* Firme */
-        .sig-section { display: flex; justify-content: space-between; margin-top: 30px; }
-        .sig-box { text-align: center; width: 45%; }
-        canvas { border: 1px dashed #ccc; width: 100%; height: 100px; background: #fff; }
 
-        /* --- LOGICA DI STAMPA --- */
+        /* Firme */
+        .signature-section { display: flex; justify-content: space-between; margin-top: 30px; gap: 40px; }
+        .sig-block { flex: 1; text-align: center; }
+        .sig-label { font-weight: bold; display: block; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 2px; }
+        canvas { border: 1px dashed #bbb; background: #fff; width: 100%; height: 100px; }
+
         @media print {
-            /* Nasconde tutto ciò che non è attivo */
+            @page { size: A4; margin: 0; }
             body { background: white; }
             .no-print { display: none !important; }
             .screen { display: none !important; }
-            .screen.active { 
-                display: block !important; 
-                margin: 0 !important; 
-                padding: 10mm !important; 
-                width: 100% !important; 
-                box-shadow: none !important;
-            }
-            input, textarea { border: none !important; border-bottom: 1px solid #000 !important; border-radius: 0 !important; }
+            .screen.active { display: block !important; margin: 0 !important; padding: 8mm 12mm !important; width: 100% !important; box-shadow: none !important; }
+            input, textarea { border: none !important; border-bottom: 1px solid #000 !important; border-radius: 0 !important; background: transparent !important; }
             .gray-box { background: #f2f2f2 !important; border: 1px solid #ccc !important; -webkit-print-color-adjust: exact; }
             .btn-clear { display: none; }
         }
@@ -65,43 +55,59 @@
 <body>
 
     <div class="no-print">
-        <button class="btn-menu" onclick="showDoc('home-screen')">🏠 HOME MENU</button>
-        <button class="btn-menu btn-print" onclick="window.print()">🖨 STAMPA MODULO ATTIVO</button>
+        <button class="btn-menu" onclick="showDoc('home-screen')">🏠 HOME</button>
+        <button class="btn-menu btn-print" onclick="window.print()">🖨 STAMPA MODULO</button>
     </div>
 
     <div id="home-screen" class="screen active">
         <div class="logo-home">PHOTO ANGELINI</div>
         <div class="subtitle-home">S.R.L. - Servizi Fotografici Professionali</div>
-        
-        <div class="menu-container">
-            <button class="btn-menu btn-large" onclick="showDoc('contratto')">📄 Contratto Matrimonio</button>
-            <button class="btn-menu btn-large" onclick="showDoc('draft')">📝 Draft Matrimonio (A4)</button>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <button class="btn-large" onclick="showDoc('contratto')">📄 Contratto Matrimonio</button>
+            <button class="btn-large" onclick="showDoc('draft')">📝 Draft Matrimonio</button>
         </div>
-        <p style="margin-top: 100px; color: #999; font-size: 12px;">Castellammare del Golfo (TP)</p>
     </div>
 
     <div id="contratto" class="screen">
-        <div class="intestazione">
-            <h1 style="border:none; font-size: 24px;">PHOTO ANGELINI SRL</h1>
-            <p>Via Segesta, 189 - 91014 Castellammare del Golfo</p>
-            <p>P.IVA: 02621630819 - Telefono/Fax: 0924 30662</p>
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h1 style="border:none; font-size: 26px; margin:0;">PHOTO ANGELINI SRL</h1>
+            <p style="font-weight:bold; margin:2px 0;">Via Segesta, 189 - 91014 Castellammare del Golfo</p>
+            <p style="font-weight:bold; margin:2px 0;">P.IVA: 02621630819 - Telefono/Fax: 0924 30662</p>
         </div>
 
         <p>Con la presente i committenti,</p>
-        <div class="row"><span>sig.</span><input type="text" style="width:200px"><span>in via</span><input type="text" class="flex-fill"><span>Tel.</span><input type="text" style="width:120px"><span>e</span></div>
-        <div class="row"><span>sig.ra</span><input type="text" style="width:195px"><span>in via</span><input type="text" class="flex-fill"><span>Tel.</span><input type="text" style="width:120px"></div>
+        <div class="row-flex">
+            <span>sig.</span> <input type="text" style="width:220px;"> 
+            <span>in via</span> <input type="text" class="flex-fill"> 
+            <span>Tel.</span> <input type="text" style="width:140px;"> <span>e</span>
+        </div>
+        <div class="row-flex">
+            <span>sig.ra</span> <input type="text" style="width:215px;"> 
+            <span>in via</span> <input type="text" class="flex-fill"> 
+            <span>Tel.</span> <input type="text" style="width:140px;">
+        </div>
         
-        <h3 style="text-align:center; margin:15px 0;">CONFERISCONO</h3>
-        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> sita in Castellammare del Golfo, via Segesta, 189, il compito di realizzare un servizio di nozze/ritratto.</p>
-        
-        <p><strong>Art. 1 —</strong> Il servizio sarà realizzato il <input type="text" style="width:120px"> alle ore <input type="text" style="width:70px"></p>
-        <div class="row"><span>nella Chiesa</span><input type="text" class="flex-fill"><span>in</span><input type="text" class="flex-fill"><span>sala</span><input type="text" class="flex-fill"></div>
+        <p style="text-align:center; font-weight:bold; margin:15px 0;">CONFERISCONO</p>
+        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> sita in via Segesta, 189, il compito di realizzare un servizio di:</p>
+        <p style="text-align:center;">[ ] Nozze [ ] Ritratto [ ] Altro</p>
 
-        <p style="font-size: 11px; margin-top:20px;">[... Resto degli articoli del contratto salvati ...]</p>
-        
-        <div class="sig-section">
-            <div class="sig-box"><span>Firma Committenti</span><canvas></canvas></div>
-            <div class="sig-box"><span>Firma Ditta</span><canvas></canvas></div>
+        <div class="row-flex" style="margin-top:15px;">
+            <span><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno</span> 
+            <input type="date" style="width:140px;"> 
+            <span>alle ore</span> <input type="text" style="width:80px;">
+        </div>
+        <div class="row-flex">
+            <span>nella Chiesa</span> <input type="text" class="flex-fill"> 
+            <span>in</span> <input type="text" class="flex-fill"> 
+            <span>sala</span> <input type="text" class="flex-fill">
+        </div>
+
+        <p style="font-size: 13px; text-align: justify;"><strong>Art. 3 —</strong> Per legge, i negativi, i files di acquisizione e gli originali sono di comproprietà del fotografo che li conserva per anni 10 nel rispetto della privacy.</p>
+        <p style="font-size: 13px;"><strong>Art. 6 —</strong> Pagamento: € <input type="number" style="width:80px;"> come caparra; 50% 15gg prima; saldo alla consegna.</p>
+
+        <div class="signature-section">
+            <div class="sig-block"><span class="sig-label">I COMMITTENTI (Firma)</span><canvas id="sig1"></canvas></div>
+            <div class="sig-block"><span class="sig-label">LA DITTA (Firma)</span><canvas id="sig2"></canvas></div>
         </div>
     </div>
 
@@ -109,45 +115,77 @@
         <h1>DRAFT MATRIMONIO</h1>
 
         <h2>SPOSO</h2>
-        <div class="row"><span style="font-weight:bold; width:300px;">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in pantalone e camicia con outfit nella stanza dei genitori libera.</div>
-        <div class="row"><span>• ORARIO GENITORI E FRATELLI:</span><input type="text" class="time-box"></div>
-        <div class="row"><span>• ORARIO USCITA CASA SPOSO:</span><input type="text" class="time-box"></div>
-        <textarea placeholder="Note Sposo..."></textarea>
+        <div class="row-flex">
+            <span style="font-weight:bold; flex: 0 0 310px;">ORARIO ARRIVO FOTOGRAFO:</span>
+            <input type="text" style="width:80px; text-align:center;">
+        </div>
+        <div class="gray-box">
+            <span class="section-title">Indicazioni:</span>
+            Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori, già libera da altri oggetti che non siano dello sposo.
+        </div>
+        <div class="row-flex"><span>• ORARIO GENITORI E FRATELLI NON SPOSATI:</span><input type="text" style="width:80px;"></div>
+        <div class="row-flex"><span>• ORARIO USCITA CASA SPOSO:</span><input type="text" style="width:80px;"></div>
+        <span class="section-title">Note Sposo:</span><textarea></textarea>
 
         <h2>SPOSA</h2>
-        <div class="row"><span style="font-weight:bold; width:300px;">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni:</span> In vestaglia con abito appeso. <strong>Mangiare prima di vestirsi.</strong></div>
-        <div class="row"><span>• ORARIO USCITA SPOSA:</span><input type="text" class="time-box"></div>
-        <textarea placeholder="Note Sposa..."></textarea>
+        <div class="row-flex">
+            <span style="font-weight:bold; flex: 0 0 310px;">ORARIO ARRIVO FOTOGRAFO:</span>
+            <input type="text" style="width:80px; text-align:center;">
+        </div>
+        <div class="gray-box">
+            <span class="section-title">Indicazioni & Consigli:</span>
+            Farsi trovare in vestaglia con l'abito appeso e accessori pronti nella stanza dei genitori libera. <strong>Consiglio: Mangiare qualcosa prima di vestirsi.</strong>
+        </div>
+        <div class="row-flex"><span>• ORARIO USCITA SPOSA:</span><input type="text" style="width:80px;"></div>
+        <span class="section-title">Note Sposa:</span><textarea></textarea>
 
         <h2>CHIESA / COMUNE</h2>
         <div class="gray-box">
-            • L'auto della sposa attende il segnale del fotografo...<br>
-            • La donna starà alla sinistra dell'uomo.<br>
-            • Lo sposo bacia la sposa sulla fronte.
+            <span class="section-title">Indicazioni:</span>
+            • L'auto con la sposa dovrà fermarsi nei pressi aspettando il segnale del fotografo.<br>
+            • Per l'ingresso e l'uscita, la donna starà alla sinistra dell'uomo.<br>
+            • Per l'incontro, lo sposo accoglie la sposa togliendo il velo e baciandola sulla fronte.
+        </div>
+        <div class="gray-box" style="border-style: dashed;">
+            <span class="section-title">Consigli:</span>
+            • Evitare di guardare sempre il libretto messa. • Foto a fine messa solo con famiglia intima.<br>
+            • Scarpe di scorta comode e trucco labbra per ritocco.
         </div>
 
         <h2>SALA</h2>
         <div class="gray-box">
-            • Prenotare 2 menù (1 celiaco).<br>
-            • Postazione con tavolo vuoto per proiezione.<br>
-            • Comunicare scherzi o dediche alla troupe.
+            • Prenotare 2 menù staff (1 celiaco/senza lattosio).<br>
+            • Postazione con tavolo vuoto per eventuale proiezione.<br>
+            • Comunicare scherzi, dediche o flashmob alla troupe.
         </div>
 
-        <div style="margin-top: 20px; text-align: center; border-top: 1px solid #000; padding-top: 10px;">
+        <div style="margin-top: 15px; text-align: center; border-top: 1px solid #000; padding-top: 8px;">
             <p><strong>Importante. Eventuali sorprese quali addio al celibato/nubilato, serenate e quant’altro, non vanno organizzate la sera prima.</strong></p>
         </div>
     </div>
 
     <script>
         function showDoc(id) {
-            // Nasconde tutte le schermate
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            // Mostra quella selezionata
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
+        function setupCanvas(id) {
+            const canvas = document.getElementById(id);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            canvas.addEventListener('mousedown', () => drawing = true);
+            canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
+            canvas.addEventListener('mousemove', (e) => {
+                if (!drawing) return;
+                const rect = canvas.getBoundingClientRect();
+                ctx.lineWidth = 2; ctx.lineCap = 'round';
+                ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+                ctx.stroke();
+            });
+        }
+        setupCanvas('sig1'); setupCanvas('sig2');
     </script>
 </body>
 </html>
