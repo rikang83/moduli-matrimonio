@@ -5,86 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Angelini - App Gestionale</title>
     <style>
-        /* --- STILI DI SISTEMA --- */
         body { font-family: "Times New Roman", Times, serif; background: #444; margin: 0; padding: 0; color: #000; }
         .no-print { text-align: center; padding: 15px; background: #222; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #444; }
         .btn-menu { padding: 10px 25px; font-size: 14px; cursor: pointer; background: #fff; border: 2px solid #222; border-radius: 8px; font-weight: bold; margin: 0 5px; }
         .btn-print { background: #27ae60 !important; color: white !important; border: none !important; }
 
-        /* Contenitore Foglio */
-        .screen { 
-            display: none; 
-            background: white; 
-            width: 95%; 
-            max-width: 800px; 
-            margin: 20px auto; 
-            padding: 15mm; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
-            box-sizing: border-box; 
-        }
+        .screen { display: none; background: white; width: 95%; max-width: 800px; margin: 20px auto; padding: 10mm 15mm; box-shadow: 0 0 20px rgba(0,0,0,0.5); box-sizing: border-box; }
         .active { display: block; }
 
-        /* --- HOME PAGE --- */
+        /* --- HOME --- */
         #home-screen { text-align: center; padding: 50px 20px; background: white; }
-        .logo-home { font-size: clamp(24px, 8vw, 45px); letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; text-align: center; }
+        .logo-home { font-size: 45px; letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; text-align: center; }
         .subtitle-home { font-size: 18px; color: #666; margin-bottom: 50px; font-style: italic; text-align: center; }
-        .btn-large { width: 90%; max-width: 350px; padding: 20px; font-size: 18px; text-transform: uppercase; margin: 10px auto; display: block; cursor: pointer; border-radius: 10px; border: 2px solid #222; background: white; font-weight: bold; }
+        .btn-large { width: 350px; padding: 20px; font-size: 18px; text-transform: uppercase; margin: 15px auto; display: block; cursor: pointer; border-radius: 10px; border: 2px solid #222; background: white; font-weight: bold; }
 
-        /* --- STILI CONTRATTO --- */
+        /* --- INTESTAZIONE CENTRATA --- */
+        .header-block { width: 100%; text-align: center; margin-bottom: 20px; }
+        .header-block h1 { font-size: 26px; margin: 0; letter-spacing: 1px; display: block; width: 100%; }
+        .header-block p { font-size: 14px; margin: 2px 0; font-weight: bold; display: block; width: 100%; }
+
+        /* --- CONTRATTO --- */
         #contratto { font-size: 14px; line-height: 1.2; }
-        .header-table { width: 100%; margin-bottom: 15px; text-align: center; }
-        .header-table h1 { font-size: 24px; margin: 0; letter-spacing: 1px; text-align: center; width: 100%; }
-        .header-table p { font-size: 14px; margin: 1px 0; font-weight: bold; text-align: center; width: 100%; }
-
         #contratto p { margin: 4px 0; text-align: justify; }
         .center-bold { text-align: center; font-weight: bold; margin: 10px 0; font-size: 16px; width: 100%; display: block; }
-        
-        .row-container { display: flex; align-items: center; gap: 4px; width: 100%; margin-bottom: 3px; overflow: hidden; }
+        .row-container { display: flex; align-items: center; gap: 4px; width: 100%; margin-bottom: 3px; }
         .flex-fill { flex-grow: 1; min-width: 30px; }
-        input[type="text"], input[type="date"], input[type="number"] { border: 1px solid #ccc; font-family: inherit; font-size: 13px; padding: 2px 4px; border-radius: 3px; background: #fdfdfd; box-sizing: border-box; }
-        
+        input[type="text"], input[type="date"], input[type="number"] { border: 1px solid #ccc; font-family: inherit; font-size: 13px; padding: 2px 4px; border-radius: 3px; background: #fdfdfd; }
         .options-centered { text-align: center; margin: 6px 0; font-weight: bold; width: 100%; }
-        .checkbox-group { display: inline-flex; align-items: center; gap: 5px; margin: 0 10px; white-space: nowrap; }
-
-        .art6-sub { margin-left: 20px; margin-top: 3px; font-size: 13px; }
+        .checkbox-group { display: inline-flex; align-items: center; gap: 5px; margin: 0 10px; }
+        .art6-sub { margin-left: 25px; margin-top: 3px; }
         .art78-compact { font-size: 11px; color: #333; margin: 3px 0; line-height: 1.1; }
 
         /* Firme */
-        .signature-section { display: flex; justify-content: space-between; margin-top: 15px; gap: 20px; width: 100%; }
-        .sig-block { flex: 1; text-align: center; min-width: 0; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 15px; gap: 30px; }
+        .sig-block { flex: 1; text-align: center; }
         .sig-label { font-weight: bold; display: block; margin-bottom: 4px; border-bottom: 1px solid #000; font-size: 13px; }
         canvas { border: 1px dashed #bbb; background: #fff; width: 100%; height: 60px; border-radius: 4px; }
 
-        /* --- STILI DRAFT --- */
-        #draft { font-size: 13.5px; line-height: 1.25; }
+        /* --- DRAFT (RIPRISTINATO INTEGRALE) --- */
         #draft h1 { text-align: center; font-size: 20px; margin: 0 0 8px 0; border-bottom: 1px solid #000; text-transform: uppercase; }
         #draft h2 { background: #f2f2f2; padding: 3px 10px; font-size: 14px; border-left: 4px solid #222; margin: 10px 0 4px 0; text-transform: uppercase; }
-        .row-draft { display: flex; align-items: center; gap: 8px; margin: 3px 0; width: 100%; }
-        .label-draft { flex: 0 0 280px; font-weight: bold; font-size: 13px; }
-        .input-draft { flex-grow: 1; border: 1px solid #ccc; padding: 2px 6px; border-radius: 3px; font-size: 13px; min-width: 0; }
-        .time-box { max-width: 70px; text-align: center; }
-        .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 6px 10px; margin: 4px 0; font-size: 12px; border-radius: 4px; }
+        .row-draft { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+        .label-draft { flex: 0 0 310px; font-weight: bold; font-size: 13px; }
+        .input-draft { flex-grow: 1; border: 1px solid #ccc; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
+        .time-box { width: 70px; text-align: center; }
+        .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 6px 10px; margin: 4px 0; font-size: 12.5px; border-radius: 4px; }
         .section-title { font-weight: bold; text-decoration: underline; display: block; margin-bottom: 2px; }
-        textarea { width: 100%; height: 35px; border: 1px solid #ccc; border-radius: 3px; padding: 4px; font-family: inherit; font-size: 12px; resize: none; box-sizing: border-box; }
+        textarea { width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 3px; padding: 4px; font-family: inherit; font-size: 12px; resize: none; margin-top: 2px; }
 
-        /* --- FIX STAMPA --- */
         @media print {
             @page { size: A4; margin: 10mm; }
             body { background: white; padding: 0; }
             .no-print, .btn-clear { display: none !important; }
-            .screen { 
-                display: none !important; 
-            }
-            .screen.active { 
-                display: block !important; 
-                box-shadow: none; 
-                width: 100% !important; 
-                margin: 0 !important; 
-                padding: 0 !important; 
-            }
+            .screen { display: none !important; }
+            .screen.active { display: block !important; box-shadow: none; width: 100% !important; margin: 0 !important; padding: 0 !important; }
             input, textarea { border: none !important; border-bottom: 1px solid #000 !important; background: transparent !important; }
             canvas { border: none !important; border-bottom: 1px solid #000 !important; height: 50px !important; }
-            .header-table h1, .header-table p, .center-bold, .logo-home { text-align: center !important; }
+            .header-block, .header-block h1, .header-block p, .center-bold { text-align: center !important; }
             .gray-box { background: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
         }
     </style>
@@ -104,7 +81,7 @@
     </div>
 
     <div id="contratto" class="screen">
-        <div class="header-table">
+        <div class="header-block">
             <h1>PHOTO ANGELINI SRL</h1>
             <p>Via Segesta, 189 - 91014 Castellammare del Golfo</p>
             <p>P.IVA: 02621630819 - Telefono/Fax: 0924 30662</p>
@@ -112,14 +89,14 @@
 
         <p>Con la presente i committenti,</p>
         <div class="row-container">
-            <span>sig.</span> <input type="text" style="width:180px;"> 
+            <span>sig.</span> <input type="text" style="width:200px;"> 
             <span>in via</span> <input type="text" class="flex-fill"> 
-            <span>Tel.</span> <input type="text" style="width:120px;"> <span>e</span>
+            <span>Tel.</span> <input type="text" style="width:130px;"> <span>e</span>
         </div>
         <div class="row-container">
-            <span>sig.ra</span> <input type="text" style="width:180px;"> 
+            <span>sig.ra</span> <input type="text" style="width:200px;"> 
             <span>in via</span> <input type="text" class="flex-fill"> 
-            <span>Tel.</span> <input type="text" style="width:120px;">
+            <span>Tel.</span> <input type="text" style="width:130px;">
         </div>
         
         <div class="center-bold">CONFERISCONO</div>
@@ -135,15 +112,13 @@
 
         <div class="row-container">
             <span><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno</span> 
-            <input type="date" style="width:130px;"> 
-            <span>alle ore</span> 
-            <input type="text" style="width:70px;">
+            <input type="date" style="width:140px;"> 
+            <span>alle ore</span> <input type="text" style="width:80px;">
         </div>
-        
         <div class="row-container">
-            <span>nella Chiesa</span> <input type="text" class="flex-fill"> 
+            <span>nella Chiesa</span> <input type="text" style="width:200px;"> 
             <span>in</span> <input type="text" class="flex-fill"> 
-            <span>sala</span> <input type="text" style="width:150px;">
+            <span>sala</span> <input type="text" style="width:180px;">
         </div>
         
         <p><strong>Art. 2 —</strong> La descrizione del servizio per quantità e qualità di stampe ed altri aspetti come stabilito dalle parti:</p>
@@ -169,7 +144,7 @@
 
         <p class="art78-compact"><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente, in qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità.</p>
 
-        <p style="text-align:right; margin-top:15px;">Castellammare del Golfo lì, <input type="date" style="width:140px;"></p>
+        <p style="text-align:right; margin-top:20px;">Castellammare del Golfo lì, <input type="date" style="width:150px;"></p>
 
         <div class="signature-section">
             <div class="sig-block">
@@ -189,30 +164,45 @@
         <h1>DRAFT MATRIMONIO</h1>
         <h2>SPOSO</h2>
         <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="input-draft time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori libera da altri oggetti.</div>
-        <div class="row-draft"><span class="label-draft">• GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• PAGGETTI E DAMIGELLE:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• USCITA CASA SPOSO:</span><input type="text" class="input-draft time-box"></div>
-        <textarea placeholder="Note Sposo..."></textarea>
+        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori, già libera da altri oggetti che non siano dello sposo.</div>
+        <div class="row-draft"><span class="label-draft">• ORARIO GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO PAGGETTI E DAMIGELLE (non obbligatori):</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO FOTO/VIDEO USCITA CASA SPOSO:</span><input type="text" class="input-draft time-box"></div>
+        <span class="section-title">Note Sposo:</span><textarea placeholder="Annotazioni..."></textarea>
 
         <h2>SPOSA</h2>
         <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="input-draft time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in vestaglia con l'abito appeso e accessori pronti. <strong>Consiglio: Mangiare qualcosa prima.</strong></div>
-        <div class="row-draft"><span class="label-draft">• GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• PAGGETTI E DAMIGELLE:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• AUTO USCITA SPOSA:</span><input type="text" class="input-draft time-box"></div>
-        <textarea placeholder="Note Sposa..."></textarea>
+        <div class="gray-box"><span class="section-title">Indicazioni & Consigli:</span> Farsi trovare in vestaglia con l'abito appeso e accessori pronti nella stanza dei genitori libera. <strong>Consiglio: Mangiare qualcosa prima di vestirsi.</strong></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO PAGGETTI E DAMIGELLE:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• ORARIO AUTO USCITA SPOSA:</span><input type="text" class="input-draft time-box"></div>
+        <span class="section-title">Note Sposa:</span><textarea placeholder="Annotazioni..."></textarea>
 
-        <h2>CHIESA / COMUNE & SALA</h2>
+        <h2>CHIESA / COMUNE</h2>
         <div class="gray-box">
-            • L'auto con la sposa aspetta il segnale del fotografo. • Donna a sinistra dell'uomo.<br>
-            • Lo sposo accoglie la sposa baciandola sulla fronte.<br>
-            • Prenotare 2 menù (celiaci/normali). • Postazione 2 posti in sala.
+            <span class="section-title">Indicazioni:</span>
+            • L'auto con la sposa dovrà fermarsi nei pressi/vicinanze della Chiesa/Comune, aspettando il segnale del fotografo che le dirà di avvicinarsi; nel frattempo lo sposo insieme a chi lo accompagna farà l'ingresso nella Chiesa/Comune aspettando l'arrivo della sposa all'altare.<br>
+            • Per l'ingresso e l'uscita, la donna starà alla sinistra dell'uomo.<br>
+            • Per l'incontro, lo sposo accoglie la sposa togliendo il velo (se c'è) e baciandola sulla fronte, poi gli sposi insieme a chi li accompagna si saluteranno e si accomoderanno rispettivamente ai propri posti.
         </div>
-        <div style="margin-top: 10px; text-align: center; border-top: 1px solid #000; padding-top: 5px; font-size: 11px;">
-            <strong>No sorprese/serenate la sera prima del matrimonio.</strong>
+        <div class="gray-box" style="border-style: dashed;">
+            <span class="section-title">Consigli:</span>
+            • Evitare di guardare sempre eventuale libretto messa.<br>
+            • A fine messa evitare le foto con tutti (solo testimoni e famiglia intima).<br>
+            • Evitare di salutare tutti all'uscita per preservare il trucco.<br>
+            • Scarpe di scorta comode (stessa altezza) e trucco labbra per ritocco.
+        </div>
+
+        <h2>SALA</h2>
+        <div class="gray-box">
+            • Prenotare solo 2 menù invece che 4, di cui 1 completo per celiaci e senza lattosio ed uno normale.<br>
+            • Richiedere al direttore una postazione con 2 posti ed un tavolo vuoto per eventuale proiezione.<br>
+            • Eventuali dediche, scherzi, flashmob ect. vanno comunicati alla troupe fotografica.
+        </div>
+        <div style="margin-top: 12px; text-align: center; border-top: 1px solid #000; padding-top: 8px;">
+            <p><strong>Importante. Eventuali sorprese quali addio al celibato/nubilato, serenate e quant’altro, non vanno organizzate la sera prima.</strong></p>
         </div>
     </div>
 
@@ -228,15 +218,11 @@
         }
         function setupS(id) {
             const canvas = document.getElementById(id);
-            if (!canvas) return;
             const ctx = canvas.getContext('2d');
             let draw = false;
             function pos(e) {
                 const r = canvas.getBoundingClientRect();
-                return { 
-                    x: (e.clientX || (e.touches && e.touches[0].clientX)) - r.left, 
-                    y: (e.clientY || (e.touches && e.touches[0].clientY)) - r.top 
-                };
+                return { x: (e.clientX || (e.touches && e.touches[0].clientX)) - r.left, y: (e.clientY || (e.touches && e.touches[0].clientY)) - r.top };
             }
             canvas.addEventListener('mousedown', (e) => { draw = true; ctx.beginPath(); const p = pos(e); ctx.moveTo(p.x, p.y); ctx.lineWidth = 2; });
             canvas.addEventListener('mousemove', (e) => { if(!draw) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
