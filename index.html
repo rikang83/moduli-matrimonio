@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Angelini - Contratto</title>
+    <style>
+        /* Stile per il tablet/computer */
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background-color: #f0f0f0; }
+        .foglio { background: white; padding: 40px; max-width: 800px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; margin-bottom: 5px; }
+        .info-studio { text-align: center; font-size: 0.9em; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        input[type="text"], input[type="time"], input[type="date"] { border: none; border-bottom: 1px dotted #000; font-size: 16px; padding: 2px; }
+        .canvas-container { border: 1px solid #ccc; margin-top: 20px; width: 100%; height: 200px; touch-action: none; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; margin: 10px 5px; }
+        
+        /* Regole per la STAMPA */
+        @media print {
+            body { background: white; padding: 0; }
+            .foglio { box-shadow: none; max-width: 100%; margin: 0; padding: 0; }
+            button, .no-print { display: none; } /* Nasconde i tasti quando stampi */
+            input { border: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print" style="text-align:center;">
+    <button onclick="window.print()">STAMPA O SALVA PDF</button>
+</div>
+
+<div class="foglio">
+    <h1>PHOTO ANGELINI SRL</h1>
+    <h2>SCONTRINO - ACCONTI</h2>
+    <div class="info-studio">
+        L.C.D.F. : Via Segesta, 189 91014 — Castellammare del Golfo [cite: 110]<br>
+        P.IVA: 02621630819 [cite: 111] | Tel: 0924 30662 [cite: 112]
+    </div>
+
+    <p>Con la presente i committenti, [cite: 113]</p>
+    <p>
+        sig. <input type="text" style="width:250px;"> in via <input type="text" style="width:200px;"> Tel. <input type="text"> [cite: 114]<br>
+        e sig.ra <input type="text" style="width:230px;"> in via <input type="text" style="width:200px;"> Tel. <input type="text"> [cite: 115]
+    </p>
+    
+    <p style="text-align:center;"><strong>CONFERISCONO</strong> [cite: 116]</p>
+    <p>alla ditta Photo Angelini s.r.l. il compito di realizzare un servizio di nozze/ritratto. [cite: 117-118]</p>
+
+    <p><strong>Art. 1</strong> — Il servizio dovrà essere realizzato il giorno <input type="date"> alle ore <input type="time"> nella Chiesa <input type="text">. [cite: 120-121]</p>
+    
+    <p><em>(Seguono gli articoli del contratto come da documento originale...)</em></p>
+
+    <div style="margin-top:50px; display: flex; justify-content: space-between;">
+        <div>
+            <p><strong>I COMMITTENTI (Firma)</strong> [cite: 141]</p>
+            <canvas id="canvasFirma" class="canvas-container"></canvas><br>
+            <button type="button" class="no-print" onclick="clearCanvas()">Cancella Firma</button>
+        </div>
+        <div style="text-align:right;">
+            <p><strong>LA DITTA</strong> [cite: 141]</p>
+            <br><br>__________________________ [cite: 142]
+        </div>
+    </div>
+</div>
+
+<script>
+    // Logica base per la firma (Canvas)
+    const canvas = document.getElementById('canvasFirma');
+    const ctx = canvas.getContext('2d');
+    let writing = false;
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('touchstart', startPosition);
+    canvas.addEventListener('touchend', endPosition);
+    canvas.addEventListener('touchmove', draw);
+
+    function startPosition(e) { writing = true; draw(e); }
+    function endPosition() { writing = false; ctx.beginPath(); }
+    function draw(e) {
+        if (!writing) return;
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+</script>
+
+</body>
+</html>
