@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Angelini - App Gestionale</title>
     <style>
-        body { font-family: "Times New Roman", Times, serif; line-height: 1.8; background: #444; margin: 0; padding: 20px; color: #000; }
+        body { font-family: "Times New Roman", Times, serif; line-height: 1.6; background: #444; margin: 0; padding: 20px; color: #000; }
         .no-print { text-align: center; padding: 20px; background: #222; position: sticky; top: 0; z-index: 100; border-radius: 0 0 10px 10px; margin-bottom: 20px; }
-        .screen { display: none; background: white; max-width: 850px; margin: 0 auto; padding: 40px 60px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .screen { display: none; background: white; max-width: 850px; margin: 0 auto; padding: 30px 50px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         .active { display: block; }
         
         /* Home Screen */
@@ -16,54 +16,51 @@
         .btn-menu:hover { background: #222; color: #fff; }
 
         /* Intestazione */
-        .header-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; text-align: center; }
-        .header-table h1 { font-size: 28px; margin: 0; letter-spacing: 1px; width: 100%; }
-        .header-table p { font-size: 16px; margin: 2px 0; font-weight: bold; width: 100%; text-align: center; }
+        .header-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: center; }
+        .header-table h1 { font-size: 26px; margin: 0; letter-spacing: 1px; }
+        .header-table p { font-size: 15px; margin: 1px 0; font-weight: bold; }
 
-        /* Formattazione Testo */
-        p { margin: 10px 0; text-align: justify; font-size: 16px; }
-        .center-bold { text-align: center; font-weight: bold; margin: 20px 0; font-size: 18px; }
+        /* Formattazione Testo Contratto */
+        p { margin: 8px 0; text-align: justify; font-size: 15.5px; }
+        .compact-text { font-size: 12.5px; line-height: 1.3; margin: 5px 0; }
+        .tight-line { line-height: 1.2; margin: 5px 0; }
+        .center-bold { text-align: center; font-weight: bold; margin: 15px 0; font-size: 17px; }
         
-        /* Opzioni */
-        .options-centered { text-align: center; margin: 15px 0; font-weight: bold; }
-        .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin: 0 15px; }
-        input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
-
         /* Struttura Campi */
-        .row-container { display: flex; align-items: center; gap: 5px; width: 100%; margin-bottom: 5px; }
+        .row-container { display: flex; align-items: center; gap: 5px; width: 100%; margin-bottom: 4px; }
         .flex-fill { flex-grow: 1; min-width: 50px; }
-        input[type="text"], input[type="date"], input[type="number"] { border: 1px solid #ccc; font-family: inherit; font-size: 15px; padding: 4px 8px; border-radius: 4px; background: #fdfdfd; }
-
-        /* Articolo 6 */
-        .art6-sub { margin-left: 40px; margin-top: 5px; }
-        .art6-sub p { margin: 5px 0; }
+        input[type="text"], input[type="date"], input[type="number"] { border: 1px solid #ccc; font-family: inherit; font-size: 14px; padding: 3px 6px; border-radius: 4px; background: #fdfdfd; }
+        .options-centered { text-align: center; margin: 10px 0; font-weight: bold; }
+        .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin: 0 15px; }
+        input[type="checkbox"] { transform: scale(1.2); }
 
         /* Firme */
-        .signature-section { display: flex; justify-content: space-between; margin-top: 40px; gap: 40px; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 25px; gap: 40px; }
         .sig-block { flex: 1; text-align: center; }
-        .sig-label { font-weight: bold; display: block; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 5px; }
-        canvas { border: 1px dashed #bbb; background: #fff; touch-action: none; width: 100%; height: 130px; border-radius: 5px; }
-        .btn-clear { font-size: 11px; padding: 4px 10px; margin-top: 8px; cursor: pointer; background: #eee; border: 1px solid #ccc; }
+        .sig-label { font-weight: bold; display: block; margin-bottom: 5px; border-bottom: 1px solid #000; padding-bottom: 2px; font-size: 14px; }
+        canvas { border: 1px dashed #bbb; background: #fff; touch-action: none; width: 100%; height: 100px; border-radius: 5px; }
+        .btn-clear { font-size: 10px; padding: 2px 8px; margin-top: 5px; cursor: pointer; }
 
-        /* --- STILI SPECIFICI DRAFT --- */
+        /* --- STILI DRAFT --- */
         #draft h1 { text-align: center; font-size: 20px; margin: 0 0 8px 0; border-bottom: 1px solid #000; text-transform: uppercase; }
         #draft h2 { background: #f2f2f2; padding: 3px 10px; font-size: 14px; border-left: 4px solid #222; margin: 10px 0 4px 0; text-transform: uppercase; }
         .row-draft { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
         .label-draft { flex: 0 0 310px; font-weight: bold; font-size: 13px; }
-        .input-draft { flex-grow: 1; border: 1px solid #ccc; padding: 2px 6px; border-radius: 3px; font-family: inherit; font-size: 13px; }
+        .input-draft { flex-grow: 1; border: 1px solid #ccc; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
         .time-box { width: 70px; text-align: center; }
         .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 6px 10px; margin: 4px 0; font-size: 12.5px; border-radius: 4px; }
         .section-title { font-weight: bold; text-decoration: underline; display: block; margin-bottom: 2px; }
-        textarea { width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 3px; padding: 4px; font-family: inherit; font-size: 12px; resize: none; margin-top: 2px; }
+        textarea { width: 100%; height: 30px; border: 1px solid #ccc; border-radius: 3px; padding: 4px; font-family: inherit; font-size: 12px; resize: none; }
 
         @media print {
+            @page { size: A4; margin: 0; }
             body { background: white; padding: 0; }
             .no-print, .btn-clear { display: none !important; }
             .screen { display: none !important; }
-            .screen.active { display: block !important; box-shadow: none; padding: 10mm 15mm; width: 100%; }
+            .screen.active { display: block !important; box-shadow: none; padding: 8mm 12mm; width: 100%; }
             input, textarea { border: none !important; border-bottom: 1px solid #000 !important; background: transparent !important; padding: 0 !important; }
-            canvas { border: none !important; border-bottom: 1px solid #000 !important; }
-            .gray-box { background: #f2f2f2 !important; -webkit-print-color-adjust: exact; border: 1px solid #ccc !important; }
+            canvas { border: none !important; border-bottom: 1px solid #000 !important; height: 80px; }
+            .gray-box { background: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -71,7 +68,7 @@
 
     <div class="no-print">
         <button class="btn-menu" style="font-size: 14px; padding: 8px 20px;" onclick="goHome()">🏠 HOME</button>
-        <button class="btn-menu" style="background:#27ae60; color:white; border:none; font-size: 14px; padding: 8px 20px;" onclick="window.print()">🖨 STAMPA / SALVA PDF</button>
+        <button class="btn-menu" style="background:#27ae60; color:white; border:none; font-size: 14px; padding: 8px 20px;" onclick="window.print()">🖨 STAMPA PDF</button>
     </div>
 
     <div id="home-screen" class="screen active">
@@ -92,75 +89,73 @@
 
         <p>Con la presente i committenti,</p>
         <div class="row-container">
-            <span>sig.</span> <input type="text" style="width:220px;"> 
+            <span>sig.</span> <input type="text" style="width:200px;"> 
             <span>in via</span> <input type="text" class="flex-fill"> 
-            <span>Tel.</span> <input type="text" style="width:140px;"> <span>e</span>
+            <span>Tel.</span> <input type="text" style="width:130px;"> <span>e</span>
         </div>
         <div class="row-container">
-            <span>sig.ra</span> <input type="text" style="width:215px;"> 
+            <span>sig.ra</span> <input type="text" style="width:200px;"> 
             <span>in via</span> <input type="text" class="flex-fill"> 
-            <span>Tel.</span> <input type="text" style="width:140px;">
+            <span>Tel.</span> <input type="text" style="width:130px;">
         </div>
         
         <div class="center-bold">CONFERISCONO</div>
         
-        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> sita in Castellammare del Golfo, via Segesta, 189, il compito di realizzare un servizio di:</p>
+        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> il compito di realizzare un servizio di:</p>
         <div class="options-centered">
             <span class="checkbox-group"><input type="checkbox"> <strong>nozze;</strong></span>
             <span class="checkbox-group"><input type="checkbox"> <strong>ritratto;</strong></span>
             <span class="checkbox-group"><input type="checkbox"> <strong>altro;</strong></span>
         </div>
         
-        <p>per avere una documentazione fotografica creativa ed interpretativa della cerimonia e della festa, affidandosi alla sua capacità creativa e compositiva, che hanno già avuto modo di constatare ed apprezzare nei suoi lavori precedenti.</p>
+        <p style="font-size: 14px; line-height: 1.4;">per avere una documentazione fotografica creativa ed interpretativa della cerimonia e della festa, affidandosi alla sua capacità creativa e compositiva, già apprezzata nei lavori precedenti.</p>
 
-        <div class="row-container" style="margin-top:20px;">
-            <span><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno</span> 
-            <input type="date" style="width:140px;"> 
-            <span>alle ore</span> 
-            <input type="text" style="width:80px;">
+        <div class="row-container">
+            <span><strong>Art. 1 —</strong> Servizio da realizzare il giorno</span> 
+            <input type="date" style="width:135px;"> 
+            <span>alle ore</span> <input type="text" style="width:70px;">
         </div>
-        
         <div class="row-container">
             <span>nella Chiesa</span> <input type="text" class="flex-fill"> 
             <span>in</span> <input type="text" class="flex-fill"> 
             <span>sala</span> <input type="text" class="flex-fill">
         </div>
         
-        <p><strong>Art. 2 —</strong> La descrizione del servizio per quantità e qualità di stampe ed altri aspetti come stabilito dalle parti:</p>
-        <div class="options-centered">
+        <p><strong>Art. 2 —</strong> Descrizione del servizio come stabilito dalle parti:</p>
+        <div class="options-centered" style="margin: 5px 0;">
             <span class="checkbox-group"><input type="checkbox"> <strong>sarà concordato in seguito;</strong></span>
             <span class="checkbox-group"><input type="checkbox"> <strong>come in allegato;</strong></span>
         </div>
 
-        <p><strong>Art. 3 —</strong> Per legge, i negativi, le diapositive, i files di acquisizione e/o gli originali di altra natura sono di comproprietà del fotografo autore delle riprese, che li conserva presso lo studio. Il fotografo si impegna a custodirli con la massima cura per anni 10, nel pieno rispetto delle norme sulla privacy, e ad eseguire le eventuali richieste di ristampe ai normali prezzi di listino.</p>
+        <p class="tight-line"><strong>Art. 3 —</strong> Per legge, i negativi, le diapositive, i files di acquisizione e/o gli originali sono di comproprietà del fotografo che li conserva presso lo studio. Il fotografo si impegna a custodirli con cura per anni 10, nel rispetto della privacy, e ad eseguire eventuali ristampe ai prezzi di listino.</p>
 
-        <p><strong>Art. 4 —</strong> Eventuali variazioni dell'opera dovranno essere concordate tra le parti, a meno che non dipendano da problemi di carattere tecnico.</p>
+        <p class="tight-line"><strong>Art. 4 —</strong> Eventuali variazioni dell'opera dovranno essere concordate tra le parti, a meno che non dipendano da problemi di carattere tecnico.</p>
 
-        <p><strong>Art. 5 —</strong> L’accettazione dell'opera da parte del committente libera il fotografo da qualunque responsabilità inerente l'opera stessa.</p>
+        <p style="margin: 4px 0;"><strong>Art. 5 —</strong> L’accettazione dell'opera da parte del committente libera il fotografo da qualunque responsabilità.</p>
 
-        <p><strong>Art. 6 —</strong> Il pagamento del compenso complessivo viene suddiviso in tre momenti:</p>
-        <div class="art6-sub">
-            <p>• € <input type="number" style="width:100px;"> al momento della firma di questo accordo, come caparra confirmatoria;</p>
-            <p>• il 50% circa della somma rimanente, 15 giorni prima dell'esecuzione delle riprese, a titolo di anticipo spese;</p>
-            <p>• l'importo restante pattuito a saldo della prestazione, deve essere dato alla consegna del lavoro ultimato, che deve essere ritirato entro e non oltre 12 mesi.</p>
+        <p style="margin: 4px 0;"><strong>Art. 6 —</strong> Pagamento suddiviso in tre momenti:</p>
+        <div style="margin-left: 30px; font-size: 14px; line-height: 1.2;">
+            <p>• € <input type="number" style="width:90px;"> alla firma, come caparra confirmatoria;</p>
+            <p>• il 50% del rimanente, 15 giorni prima delle riprese, come anticipo;</p>
+            <p>• saldo alla consegna del lavoro (ritiro entro 12 mesi).</p>
         </div>
 
-        <p><strong>Art. 7 —</strong> Gli sposi acconsentono che la ditta Photo Angelini s.r.l., utilizzi una parte delle immagini che ritraggano loro e la loro cerimonia, come esempio della produzione fotografica dello studio e che quindi tali immagini possano essere esposte al pubblico, ad esempio mediante affissione su manifesti pubblicitari e/o promozionali della ditta stessa, su sito web dello studio, per concorsi, ed ogni altro modo lecito.</p>
+        <p class="compact-text"><strong>Art. 7 —</strong> Gli sposi acconsentono che la ditta utilizzi parte delle immagini della cerimonia come esempio della produzione fotografica dello studio (esposizione al pubblico, sito web, concorsi, promozionali, ecc.).</p>
 
-        <p><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente, in qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità.</p>
+        <p class="compact-text"><strong>Art. 8 —</strong> Privacy: Garantiamo l'osservanza delle norme del Regolamento Gdpr n.679/2016. Il titolare Alessandro Angelini (info@photoangelini.it) è a disposizione per variazioni o cancellazioni. I dati non saranno ceduti a terzi e saranno protetti adeguatamente.</p>
 
-        <p style="text-align:right; margin-top:30px;">Castellammare del Golfo lì, <input type="date" style="width:150px;"></p>
+        <p style="text-align:right; margin: 15px 0 5px 0; font-size: 14px;">Castellammare del Golfo lì, <input type="date" style="width:130px;"></p>
 
         <div class="signature-section">
             <div class="sig-block">
                 <span class="sig-label">I COMMITTENTI (Firma)</span>
                 <canvas id="sig-com"></canvas>
-                <button class="btn-clear" onclick="clearS('sig-com')">Cancella Firma</button>
+                <button class="btn-clear" onclick="clearS('sig-com')">Cancella</button>
             </div>
             <div class="sig-block">
                 <span class="sig-label">LA DITTA (Firma)</span>
                 <canvas id="sig-ditta"></canvas>
-                <button class="btn-clear" onclick="clearS('sig-ditta')">Cancella Firma</button>
+                <button class="btn-clear" onclick="clearS('sig-ditta')">Cancella</button>
             </div>
         </div>
     </div>
@@ -169,47 +164,37 @@
         <h1>DRAFT MATRIMONIO</h1>
         <h2>SPOSO</h2>
         <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="input-draft time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori, già libera da altri oggetti che non siano dello sposo.</div>
-        <div class="row-draft"><span class="label-draft">• ORARIO GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO PAGGETTI E DAMIGELLE (non obbligatori):</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO FOTO/VIDEO USCITA CASA SPOSO:</span><input type="text" class="input-draft time-box"></div>
-        <span class="section-title" style="margin-top:3px;">Note Sposo:</span><textarea placeholder="Annotazioni..."></textarea>
+        <div class="gray-box"><span class="section-title">Indicazioni:</span> Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori libera.</div>
+        <div class="row-draft"><span class="label-draft">• GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• PAGGETTI E DAMIGELLE (non obbligatori):</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• FOTO/VIDEO USCITA CASA SPOSO:</span><input type="text" class="input-draft time-box"></div>
+        <span class="section-title">Note Sposo:</span><textarea placeholder="Annotazioni..."></textarea>
 
         <h2>SPOSA</h2>
         <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" class="input-draft time-box"></div>
-        <div class="gray-box"><span class="section-title">Indicazioni & Consigli:</span> Farsi trovare in vestaglia con l'abito appeso e accessori pronti nella stanza dei genitori libera. <strong>Consiglio: Mangiare qualcosa prima di vestirsi.</strong></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO PAGGETTI E DAMIGELLE:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
-        <div class="row-draft"><span class="label-draft">• ORARIO AUTO USCITA SPOSA:</span><input type="text" class="input-draft time-box"></div>
-        <span class="section-title" style="margin-top:3px;">Note Sposa:</span><textarea placeholder="Annotazioni..."></textarea>
+        <div class="gray-box"><span class="section-title">Indicazioni & Consigli:</span> Farsi trovare in vestaglia con l'abito appeso. <strong>Consiglio: Mangiare prima di vestirsi.</strong></div>
+        <div class="row-draft"><span class="label-draft">• GENITORI E FRATELLI NON SPOSATI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• PAGGETTI E DAMIGELLE:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• TESTIMONI, AMICI E PARENTI:</span><input type="text" class="input-draft time-box"></div>
+        <div class="row-draft"><span class="label-draft">• AUTO USCITA SPOSA:</span><input type="text" class="input-draft time-box"></div>
+        <span class="section-title">Note Sposa:</span><textarea placeholder="Annotazioni..."></textarea>
 
         <h2>CHIESA / COMUNE</h2>
         <div class="gray-box">
-            <span class="section-title">Indicazioni:</span>
-            • L'auto con la sposa dovrà fermarsi nei pressi/vicinanze della Chiesa/Comune, aspettando il segnale del fotografo che le dirà di avvicinarsi; nel frattempo lo sposo insieme a chi lo accompagna farà l'ingresso nella Chiesa/Comune aspettando l'arrivo della sposa all'altare.<br>
-            • Per l'ingresso e l'uscita, la donna starà alla sinistra dell'uomo.<br>
-            • Per l'incontro, lo sposo accoglie la sposa togliendo il velo (se c'è) e baciandola sulla fronte, poi gli sposi insieme a chi li accompagna si saluteranno e si accomoderanno rispettivamente ai propri posti.
+            • L'auto con la sposa aspetta il segnale del fotografo.<br>
+            • La donna sta alla sinistra dell'uomo.<br>
+            • Lo sposo accoglie la sposa baciandola sulla fronte.
         </div>
-
         <div class="gray-box" style="border-style: dashed;">
-            <span class="section-title">Consigli:</span>
-            • Evitare di guardare sempre eventuale libretto messa.<br>
-            • A fine messa evitare le foto con tutti (solo testimoni e famiglia intima).<br>
-            • Evitare di salutare tutti all'uscita per preservare il trucco.<br>
-            • Scarpe di scorta comode (stessa altezza) e trucco labbra per ritocco.
+            • Evitare di guardare sempre il libretto messa.<br>
+            • Foto fine messa solo famiglia intima. • Scarpe di scorta comode.
         </div>
 
         <h2>SALA</h2>
-        <div class="gray-box">
-            • Prenotare solo 2 menù invece che 4, di cui 1 completo per celiaci e senza lattosio ed uno normale.<br>
-            • Richiedere al direttore una postazione con 2 posti ed un tavolo vuoto per eventuale proiezione.<br>
-            • Eventuali dediche, scherzi, flashmob ect. vanno comunicati alla troupe fotografica.
-        </div>
-
-        <div style="margin-top: 12px; text-align: center; border-top: 1px solid #000; padding-top: 8px;">
-            <p style="margin:0;"><strong>Importante. Eventuali sorprese quali addio al celibato/nubilato, serenate e quant’altro, non vanno organizzate la sera prima.</strong></p>
+        <div class="gray-box">• Prenotare 2 menù (1 celiaco/senza lattosio). • Postazione 2 posti + tavolo vuoto.</div>
+        <div style="margin-top: 10px; text-align: center; border-top: 1px solid #000; padding-top: 5px; font-size: 12px;">
+            <strong>No sorprese/serenate la sera prima.</strong>
         </div>
     </div>
 
@@ -229,7 +214,7 @@
             let draw = false;
             function pos(e) {
                 const r = canvas.getBoundingClientRect();
-                return { x: (e.clientX || e.touches[0].clientX) - r.left, y: (e.clientY || e.touches[0].clientY) - r.top };
+                return { x: (e.clientX || (e.touches && e.touches[0].clientX)) - r.left, y: (e.clientY || (e.touches && e.touches[0].clientY)) - r.top };
             }
             canvas.addEventListener('mousedown', (e) => { draw = true; ctx.beginPath(); const p = pos(e); ctx.moveTo(p.x, p.y); });
             canvas.addEventListener('mousemove', (e) => { if(!draw) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
@@ -238,8 +223,7 @@
             canvas.addEventListener('touchmove', (e) => { if(!draw) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); });
         }
         function clearS(id) { document.getElementById(id).getContext('2d').clearRect(0,0,1000,1000); }
-        setupS('sig-com');
-        setupS('sig-ditta');
+        setupS('sig-com'); setupS('sig-ditta');
     </script>
 </body>
 </html>
