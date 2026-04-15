@@ -8,34 +8,61 @@
         body { font-family: "Times New Roman", Times, serif; background: #333; margin: 0; padding: 0; color: #000; }
         .no-print { text-align: center; padding: 15px; background: #111; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid #444; }
         .btn-menu { padding: 10px 20px; font-size: 14px; cursor: pointer; background: #fff; border: 2px solid #222; border-radius: 8px; font-weight: bold; margin: 0 5px; }
-        
+        .btn-print { background: #27ae60 !important; color: white !important; border: none !important; }
+        .btn-clear { font-size: 10px; margin-top: 5px; cursor: pointer; }
+
         .screen { display: none; background: white; width: 95%; max-width: 900px; margin: 20px auto; box-shadow: 0 0 20px rgba(0,0,0,0.5); box-sizing: border-box; }
         .active { display: block; }
 
         /* --- HOME --- */
         #home-screen { text-align: center; padding: 60px 20px; }
         .logo-home { font-size: 45px; letter-spacing: 3px; margin-bottom: 10px; font-weight: bold; }
+        .subtitle-home { font-size: 18px; color: #666; margin-bottom: 50px; font-style: italic; }
         .btn-large { width: 320px; padding: 20px; font-size: 16px; text-transform: uppercase; margin: 15px auto; display: block; cursor: pointer; border-radius: 10px; border: 2px solid #222; background: white; font-weight: bold; }
 
-        /* --- LISTINO (GALLERIA IMMAGINI) --- */
+        /* --- CONTRATTO (Margini Ottimizzati) --- */
+        #contratto { padding: 12mm 20mm; font-size: 14px; line-height: 1.25; }
+        #contratto p { margin: 4px 0; text-align: justify; }
+        .header-block { text-align: center; margin-bottom: 15px; }
+        .header-block h1 { font-size: 24px; margin: 0; }
+        .header-block p { font-size: 13px; margin: 1px 0; font-weight: bold; }
+        .center-bold { text-align: center; font-weight: bold; margin: 8px 0; font-size: 15px; display: block; }
+        .row-container { display: flex; align-items: center; gap: 4px; margin-bottom: 3px; }
+        .flex-fill { flex-grow: 1; min-width: 30px; }
+        input { border: 1px solid #ccc; font-family: inherit; font-size: 13px; padding: 1px 4px; border-radius: 3px; }
+        .options-centered { text-align: center; margin: 5px 0; font-weight: bold; }
+        .art6-sub { margin-left: 20px; }
+        .art78-compact { font-size: 11px; margin: 3px 0; line-height: 1.15; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 30px; gap: 30px; }
+        .sig-block { flex: 1; text-align: center; }
+        .sig-label { font-weight: bold; display: block; margin-bottom: 4px; border-bottom: 1px solid #000; font-size: 12px; }
+        canvas { border: 1px dashed #bbb; background: #fff; width: 100%; height: 65px; touch-action: none; }
+
+        /* --- DRAFT --- */
+        #draft { padding: 10mm 15mm; }
+        #draft h1 { text-align: center; font-size: 20px; border-bottom: 1px solid #000; }
+        #draft h2 { background: #f2f2f2; padding: 3px 10px; font-size: 14px; border-left: 4px solid #222; margin: 10px 0 4px 0; }
+        .row-draft { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+        .label-draft { flex: 0 0 300px; font-weight: bold; font-size: 13px; }
+        .gray-box { background: #f9f9f9; border: 1px solid #eee; padding: 6px; margin: 4px 0; font-size: 12.5px; border-radius: 4px; }
+        textarea { width: 100%; height: 40px; resize: none; }
+
+        /* --- LISTINO --- */
         #listino { background: #222; padding: 20px; text-align: center; }
-        .listino-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 10px; }
-        .listino-item { position: relative; cursor: pointer; transition: transform 0.2s; border: 2px solid #444; border-radius: 8px; overflow: hidden; background: #000; }
-        .listino-item:hover { transform: scale(1.03); border-color: #27ae60; }
+        .listino-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .listino-item { position: relative; cursor: pointer; border: 2px solid #444; background: #000; }
         .listino-item img { width: 100%; height: auto; display: block; }
-        .page-number { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+        .modal img { max-width: 95%; max-height: 95%; border: 2px solid white; }
 
-        /* Modal per ingrandimento */
-        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; cursor: zoom-out; }
-        .modal img { max-width: 95%; max-height: 95%; border: 2px solid white; box-shadow: 0 0 30px rgba(255,255,255,0.2); }
-
-        /* --- STAMPA --- */
         @media print {
-            .no-print, .listino-grid { display: none !important; }
-            .screen.active { display: block !important; width: 100% !important; margin: 0 !important; }
-            /* Se stampi il listino, stampa tutte le immagini una per pagina */
-            #listino.active .listino-item { display: block; page-break-after: always; border: none; }
-            #listino.active .listino-item img { width: 100%; }
+            @page { size: A4; margin: 0; }
+            .no-print, .btn-clear { display: none !important; }
+            .screen { display: none !important; box-shadow: none; width: 100% !important; margin: 0 !important; }
+            .screen.active { display: block !important; }
+            #listino.active .listino-grid { display: block; }
+            #listino.active .listino-item { page-break-after: always; border: none; margin-bottom: 0; }
+            input, textarea { border: none !important; border-bottom: 1px solid #000 !important; }
         }
     </style>
 </head>
@@ -43,45 +70,78 @@
 
     <div class="no-print">
         <button class="btn-menu" onclick="goHome()">🏠 HOME</button>
-        <button class="btn-menu" onclick="window.print()">🖨 STAMPA</button>
+        <button class="btn-menu btn-print" onclick="window.print()">🖨 STAMPA PDF</button>
     </div>
 
     <div id="home-screen" class="screen active">
         <div class="logo-home">PHOTO ANGELINI</div>
-        <div class="subtitle-home" style="text-align:center; margin-bottom:40px;">S.R.L. - Castellammare del Golfo</div>
+        <div class="subtitle-home">S.R.L. - Servizi Fotografici Professionali</div>
         <button class="btn-large" onclick="showDoc('contratto')">📄 CONTRATTO MATRIMONIO</button>
         <button class="btn-large" onclick="showDoc('draft')">📝 DRAFT MATRIMONIO</button>
-        <button class="btn-large" onclick="showDoc('listino')" style="border-color: #27ae60; color: #27ae60;">📖 SFOGLIA LISTINO PREZZI</button>
+        <button class="btn-large" onclick="showDoc('listino')" style="border-color: #27ae60; color: #27ae60;">📖 SFOGLIA LISTINO</button>
     </div>
 
-    <div id="contratto" class="screen"> </div>
-    <div id="draft" class="screen"> </div>
-
-    <div id="listino" class="screen">
-        <h2 style="color: white; margin-bottom: 20px;">Listino Prezzi 2025</h2>
-        <div class="listino-grid">
-            <div class="listino-item" onclick="zoomImg(this)">
-                <img src="Copertina.jpg" alt="Copertina">
-                <span class="page-number">Copertina</span>
-            </div>
-            <div class="listino-item" onclick="zoomImg(this)">
-                <img src="Pagina (1).jpg" alt="Pagina 1">
-                <span class="page-number">Pag. 1</span>
-            </div>
-            <div class="listino-item" onclick="zoomImg(this)">
-                <img src="Pagina (2).jpg" alt="Pagina 2">
-                <span class="page-number">Pag. 2</span>
-            </div>
-            <div class="listino-item" onclick="zoomImg(this)">
-                <img src="Pagina (17).jpg" alt="Pagina 17">
-                <span class="page-number">Pag. 17</span>
-            </div>
+    <div id="contratto" class="screen">
+        <div class="header-block">
+            <h1>PHOTO ANGELINI SRL</h1>
+            <p>Via Segesta, 189 - 91014 Castellammare del Golfo</p>
+            <p>P.IVA: 02621630819 - Tel: 0924 30662</p>
+        </div>
+        <p>Con la presente i committenti,</p>
+        <div class="row-container"><span>sig.</span><input type="text" style="width:200px;"><span>via</span><input type="text" class="flex-fill"><span>Tel.</span><input type="text" style="width:120px;"></div>
+        <div class="row-container"><span>sig.ra</span><input type="text" style="width:200px;"><span>via</span><input type="text" class="flex-fill"><span>Tel.</span><input type="text" style="width:120px;"></div>
+        <div class="center-bold">CONFERISCONO</div>
+        <p>alla ditta Photo Angelini s.r.l. il compito di realizzare un servizio di:</p>
+        <div class="options-centered">
+            <input type="checkbox"> nozze | <input type="checkbox"> ritratto | <input type="checkbox"> altro
+        </div>
+        <p>Art. 1 — Data: <input type="date"> ore <input type="text" style="width:60px;"> Chiesa: <input type="text" class="flex-fill"> Sala: <input type="text" style="width:150px;"></p>
+        <p>Art. 3 — I files originali sono di comproprietà del fotografo e custoditi per 10 anni.</p>
+        <p>Art. 6 — Pagamento: € <input type="number" style="width:80px;"> caparra; 50% prima del servizio; saldo alla consegna.</p>
+        <p class="art78-compact">Art. 7 — Autorizzazione all'uso delle immagini per scopi promozionali e portfolio.</p>
+        <p class="art78-compact">Art. 8 — Informativa Privacy GDPR 679/2016. Titolare: Alessandro Angelini.</p>
+        <div class="signature-section">
+            <div class="sig-block"><span class="sig-label">I COMMITTENTI</span><canvas id="sig-com"></canvas><button class="btn-clear" onclick="clearS('sig-com')">cancella</button></div>
+            <div class="sig-block"><span class="sig-label">LA DITTA</span><canvas id="sig-ditta"></canvas><button class="btn-clear" onclick="clearS('sig-ditta')">cancella</button></div>
         </div>
     </div>
 
-    <div id="zoomModal" class="modal" onclick="this.style.display='none'">
-        <img id="imgZoomed" src="">
+    <div id="draft" class="screen">
+        <h1>DRAFT MATRIMONIO</h1>
+        <h2>SPOSO</h2>
+        <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" style="width:80px;"></div>
+        <div class="gray-box">Farsi trovare in pantalone e camicia. Stanza libera da oggetti estranei.</div>
+        <h2>SPOSA</h2>
+        <div class="row-draft"><span class="label-draft">ORARIO ARRIVO FOTOGRAFO:</span><input type="text" style="width:80px;"></div>
+        <div class="gray-box">Vestaglia e abito appeso. Consiglio: mangiare qualcosa prima di vestirsi.</div>
+        <h2>SALA</h2>
+        <div class="gray-box">• Postazione troupe (2 posti) e tavolo vuoto per eventuale proiezione.</div>
     </div>
+
+    <div id="listino" class="screen">
+        <h2 style="color: white;">Listino Prezzi 2025</h2>
+        <div class="listino-grid">
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Copertina.jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (1).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (2).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (3).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (5).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (6).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (7).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (8).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (9).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (10).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (11).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (12).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (13).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (14).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (15).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (16).jpg"></div>
+            <div class="listino-item" onclick="zoomImg(this)"><img src="Pagina (17).jpg"></div>
+        </div>
+    </div>
+
+    <div id="zoomModal" class="modal" onclick="this.style.display='none'"><img id="imgZoomed"></div>
 
     <script>
         function showDoc(id) {
@@ -89,18 +149,38 @@
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
-
         function goHome() {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('home-screen').classList.add('active');
         }
-
         function zoomImg(el) {
             const modal = document.getElementById('zoomModal');
-            const img = document.getElementById('imgZoomed');
-            img.src = el.querySelector('img').src;
+            document.getElementById('imgZoomed').src = el.querySelector('img').src;
             modal.style.display = 'flex';
         }
+        function setupS(id) {
+            const canvas = document.getElementById(id);
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            function start(e) { drawing = true; draw(e); }
+            function end() { drawing = false; ctx.beginPath(); }
+            function draw(e) {
+                if (!drawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+                const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+                ctx.lineWidth = 2; ctx.lineTo(x, y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x, y);
+                if (e.type.includes('touch')) e.preventDefault();
+            }
+            canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', draw); canvas.addEventListener('mouseup', end);
+            canvas.addEventListener('touchstart', start); canvas.addEventListener('touchmove', draw); canvas.addEventListener('touchend', end);
+        }
+        function clearS(id) {
+            const canvas = document.getElementById(id);
+            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        }
+        setupS('sig-com'); setupS('sig-ditta');
     </script>
 </body>
 </html>
