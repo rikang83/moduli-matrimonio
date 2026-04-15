@@ -15,29 +15,31 @@
         .btn-menu { padding: 15px 35px; font-size: 18px; cursor: pointer; background: #fff; color: #222; border: 2px solid #222; border-radius: 8px; margin: 15px; font-weight: bold; transition: 0.3s; }
         .btn-menu:hover { background: #222; color: #fff; }
 
-        /* Intestazione */
-        .intestazione { text-align: center; margin-bottom: 30px; line-height: 1.3; }
-        .intestazione h1 { font-size: 26px; margin: 0; letter-spacing: 2px; }
-        .intestazione p { font-size: 14px; margin: 2px 0; font-weight: bold; }
+        /* Intestazione Allineata */
+        .intestazione { text-align: center; margin-bottom: 40px; line-height: 1.2; }
+        .intestazione h1 { font-size: 28px; margin: 0; letter-spacing: 1px; }
+        .intestazione p { font-size: 16px; margin: 2px 0; font-weight: bold; }
 
         /* Formattazione Testo */
-        h2 { text-align: center; font-size: 18px; text-decoration: underline; margin-top: 0; margin-bottom: 30px; }
-        p { margin: 18px 0; text-align: justify; font-size: 16px; }
-        .center-bold { text-align: center; font-weight: bold; margin: 30px 0; font-size: 18px; }
+        p { margin: 15px 0; text-align: justify; font-size: 16px; }
+        .center-bold { text-align: center; font-weight: bold; margin: 20px 0; font-size: 18px; }
         
-        /* Input e Checkbox */
-        input[type="text"], input[type="time"], input[type="date"], input[type="number"] {
-            border: 1px solid #ccc; font-family: inherit; font-size: 15px; padding: 5px 10px; border-radius: 4px; background: #fdfdfd;
-        }
-        .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin-right: 15px; font-weight: bold; }
+        /* Blocchi Opzioni Centrate */
+        .options-centered { text-align: center; margin: 20px 0; font-weight: bold; }
+        .checkbox-group { display: inline-flex; align-items: center; gap: 8px; margin: 0 15px; }
         input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
+
+        /* Input */
+        input[type="text"], input[type="time"], input[type="date"], input[type="number"] {
+            border: 1px solid #ccc; font-family: inherit; font-size: 15px; padding: 4px 8px; border-radius: 4px; background: #fdfdfd;
+        }
 
         /* Articolo 6 - Tabulazione */
         .art6-sub { margin-left: 40px; margin-top: 10px; }
         .art6-sub p { margin: 8px 0; }
 
         /* Firme */
-        .signature-section { display: flex; justify-content: space-between; margin-top: 60px; gap: 40px; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 50px; gap: 40px; }
         .sig-block { flex: 1; text-align: center; }
         .sig-label { font-weight: bold; display: block; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 5px; }
         canvas { border: 1px dashed #bbb; background: #fff; touch-action: none; width: 100%; height: 140px; border-radius: 5px; }
@@ -47,7 +49,7 @@
             body { background: white; padding: 0; }
             .no-print, .btn-clear { display: none !important; }
             .screen { display: block !important; box-shadow: none; padding: 0; width: 100%; }
-            input[type="text"], input[type="number"], input[type="date"], input[type="time"] { border: none !important; background: transparent !important; padding: 0 !important; }
+            input { border: none !important; background: transparent !important; padding: 0 !important; }
             canvas { border: none !important; }
             #home { display: none !important; }
         }
@@ -74,29 +76,28 @@
             <p>P.IVA: 02621630819 - Telefono/Fax: 0924 30662</p>
         </div>
 
-        <h2>SCONTRINO - ACCONTI</h2>
-
         <p>Con la presente i committenti,</p>
-        <p>sig. <input type="text" style="width:280px;"> in via <input type="text" style="width:230px;"> Tel. <input type="text" style="width:140px;"> e</p>
-        <p>sig.ra <input type="text" style="width:280px;"> in via <input type="text" style="width:230px;"> Tel. <input type="text" style="width:140px;"></p>
+        <p>sig. <input type="text" style="width:260px;"> in via <input type="text" style="width:210px;"> Tel. <input type="text" style="width:130px;"> e</p>
+        <p>sig.ra <input type="text" style="width:260px;"> in via <input type="text" style="width:210px;"> Tel. <input type="text" style="width:130px;"></p>
         
         <div class="center-bold">CONFERISCONO</div>
         
-        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> il compito di realizzare un servizio di:
+        <p>alla ditta <strong>Photo Angelini s.r.l.</strong> il compito di realizzare un servizio di:</p>
+        <div class="options-centered">
             <span class="checkbox-group"><input type="checkbox"> nozze;</span>
             <span class="checkbox-group"><input type="checkbox"> ritratto;</span>
             <span class="checkbox-group"><input type="checkbox"> altro;</span>
-        </p>
+        </div>
         
         <p>per avere una documentazione fotografica creativa ed interpretativa della cerimonia e della festa, affidandosi alla sua capacità creativa e compositiva, che hanno già avuto modo di constatare ed apprezzare nei suoi lavori precedenti.</p>
 
-        <p><strong>Art. 1 —</strong> Il servizio fotografico e/o video commissionato dovrà essere realizzato il giorno <input type="date" style="width:160px;"> che sarà celebrato alle ore <input type="time" style="width:100px;"> nella Chiesa <input type="text" style="width:200px;"> in <input type="text" style="width:150px;"> sala <input type="text" style="width:150px;">.</p>
+        <p><strong>Art. 1 —</strong> Il servizio dovrà essere realizzato il giorno <input type="date" style="width:145px;"> alle ore <input type="time" style="width:90px;"> nella Chiesa <input type="text" style="width:160px;"> in <input type="text" style="width:120px;"> sala <input type="text" style="width:120px;">.</p>
         
-        <p><strong>Art. 2 —</strong> La descrizione del servizio fotografico e/o video del presente atto, per quantità e qualità di stampe fotografiche, loro dimensioni ed altri aspetti come stabilito dalle parti:
-            <br>
-            <span class="checkbox-group" style="margin-top:10px;"><input type="checkbox"> <strong>sarà concordato in seguito;</strong></span>
-            <span class="checkbox-group"><input type="checkbox"> <strong>come in allegato;</strong></span>
-        </p>
+        <p><strong>Art. 2 —</strong> La descrizione del servizio per quantità e qualità di stampe ed altri aspetti come stabilito dalle parti:</p>
+        <div class="options-centered">
+            <span class="checkbox-group"><input type="checkbox"> sarà concordato in seguito;</span>
+            <span class="checkbox-group"><input type="checkbox"> come in allegato;</span>
+        </div>
 
         <p><strong>Art. 3 —</strong> Per Iegge, i negativi, le diapositive, i files di acquisizione e/o gli originali di altra natura sono di comproprietà del fotografo autore delle riprese, che li conserva presso Io studio. Il fotografo si impegna a custodirli con la massima cura per anni 10, nel pieno rispetto delle norme sulla privacy, e ad eseguire le eventuali richieste di ristampe ai normali prezzi di listino.</p>
 
@@ -106,16 +107,16 @@
 
         <p><strong>Art. 6 —</strong> Il pagamento del compenso complessivo viene suddiviso in tre momenti:</p>
         <div class="art6-sub">
-            <p>• € <input type="number" style="width:100px;"> al momento della firma di questo accordo, come caparra confirmatoria;</p>
+            <p>• € <input type="number" style="width:90px;"> al momento della firma di questo accordo, come caparra confirmatoria;</p>
             <p>• il 50% circa della somma rimanente, 15 giorni prima dell'esecuzione delle riprese, a titolo di anticipo spese;</p>
-            <p>• l'importo restante di € <input type="number" style="width:100px;"> a saldo della prestazione, alla consegna del lavoro ultimato, che deve essere ritirato entro e non oltre 12 mesi.</p>
+            <p>• l'importo restante pattuito a saldo della prestazione, deve essere dato alla consegna del lavoro ultimato, che deve essere ritirato entro e non oltre 12 mesi.</p>
         </div>
 
         <p><strong>Art. 7 —</strong> Gli sposi acconsentono che la ditta Photo Angelini s.r.l., utilizzi una parte delle immagini che ritraggano Ioro e la Ioro cerimonia, come esempio della produzione fotografica dello studio e che quindi tali immagini possano essere esposte al pubblico, ad esempio mediante affissione su manifesti pubblicitari e/o promozionali della ditta stessa, su sito web dello studio, per concorsi, ed ogni altro modo lecito.</p>
 
-        <p><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente. In qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità. Desideriamo ringraziarti della fiducia riposta in noi, e desideriamo ricambiarla ponendo ogni attenzione nel trattamento delle informazioni che ti riguardano.</p>
+        <p><strong>Art. 8 —</strong> Garantiamo la piena osservanza di tutte le norme previste dalla Legge a protezione della Privacy, esplicitamente confermando la nostra attenta adesione al disposto del Regolamento Gdpr n.679/2016 e da quanto ne discende, ed in particolare da quanto contenuto negli articoli dal 13 al 22, e all'articolo 34. Concretamente. In qualsiasi momento, potrai rivolgerti al titolare del trattamento dei dati Alessandro Angelini, contattandolo all'indirizzo email info@photoangelini.it per qualsiasi informazione, correzione, variazione o cancellazione tu desideri sui dati che ti riguardano. Garantiamo che i dati raccolti non verranno utilizzati per finalità diverse da quelle esplicitamente pattuite, che se non esplicitamente concesso non saranno comunicati a terzi, e che verranno conservati e protetti adottando adeguate modalità.</p>
 
-        <p>Luogo e data, <input type="text" value="Castellammare del Golfo, " style="width:300px;"></p>
+        <p style="text-align:right; margin-top:30px;">Castellammare del Golfo lì, <input type="date" style="width:150px;"></p>
 
         <div class="signature-section">
             <div class="sig-block">
@@ -135,21 +136,21 @@
         <h1 style="text-align:center;">DRAFT MATRIMONIO</h1>
         <hr>
         <p><strong>SPOSO ORARIO: <input type="time"></strong></p>
-        <p><em>Indicazioni:</em> Farsi trovare in pantalone e camicia con tutto il resto del proprio outfit nella stanza da letto dei genitori, già libera da altri oggetti che non siano dello sposo.</p>
-        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="time"></p>
-        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="time"> (ps: non obbligatori a casa sposo)</p>
-        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="time"></p>
-        <p>• ORARIO USCITA CASA SPOSO: <input type="time"></p>
+        <p><em>Indicazioni:</em> Farsi trovare in pantalone e camicia con tutto l'outfit nella stanza dei genitori libera.</p>
+        <p>• GENITORI E FRATELLI: <input type="time"></p>
+        <p>• PAGGETTI E DAMIGELLE: <input type="time"></p>
+        <p>• TESTIMONI E AMICI: <input type="time"></p>
+        <p>• USCITA CASA SPOSO: <input type="time"></p>
 
         <p><strong>SPOSA ORARIO: <input type="time"></strong></p>
-        <p><em>Indicazioni:</em> Farsi trovare in vestaglia con l’abito appeso e tutto quello che dovrà indossare. Mangiare qualcosa prima di vestirsi.</p>
-        <p>• ORARIO GENITORI E FRATELLI NON SPOSATI: <input type="time"></p>
-        <p>• ORARIO PAGGETTI E DAMIGELLE: <input type="time"></p>
-        <p>• ORARIO TESTIMONI, AMICI E PARENTI: <input type="time"></p>
-        <p>• ORARIO AUTO USCITA SPOSA: <input type="time"></p>
+        <p><em>Indicazioni:</em> In vestaglia con abito appeso. Mangiare qualcosa prima di vestirsi.</p>
+        <p>• GENITORI E FRATELLI: <input type="time"></p>
+        <p>• PAGGETTI E DAMIGELLE: <input type="time"></p>
+        <p>• TESTIMONI E AMICI: <input type="time"></p>
+        <p>• AUTO USCITA SPOSA: <input type="time"></p>
 
-        <p><strong>CHIESA:</strong> L'auto attende il segnale del fotografo. Sposo entra prima. Donna a sinistra. Bacio sulla fronte.</p>
-        <p><strong>SALA:</strong> Prenotare 2 menù (1 celiaco/no lattosio). Postazione con tavolo vuoto per proiezione.</p>
+        <p><strong>CHIESA:</strong> Auto attende segnale fotografo. Sposo entra prima. Donna a sinistra. Bacio sulla fronte.</p>
+        <p><strong>SALA:</strong> Prenotare 2 menù (1 celiaco). Postazione con tavolo vuoto per proiezione.</p>
     </div>
 
     <script>
